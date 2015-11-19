@@ -6,6 +6,10 @@ module Reddit
     register Padrino::Helpers
 
     enable :sessions
+  
+    get "/" do
+      haml :reddit
+    end
 
     ##
     # Caching support.

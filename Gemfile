@@ -22,6 +22,9 @@ gem 'haml'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'sqlite3'
 
+# Design / Styles
+gem 'bootstrap-sass', '~> 3.3.5'
+
 # Test requirements
 gem 'minitest', :require => 'minitest/autorun', :group => 'test'
 gem 'rack-test', :require => 'rack/test', :group => 'test'
