@@ -1,0 +1,9 @@
+---
+:orm: activerecord
+:test: minitest
+:mock: none
+:script: jquery
+:renderer: haml
+:stylesheet: scss
+:namespace: Reddit
+:migration_format: number
