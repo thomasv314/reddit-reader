@@ -14,8 +14,8 @@
 #   }
 #
 
-if ENV["RACK_ENV"] == "production" 
-  ActiveRecord::Base.configurations[:development] = {
+if Padrino.env == :production
+  ActiveRecord::Base.configurations[:production] = {
     :adapter   => 'mysql2',
     :encoding  => 'utf8',
     :reconnect => true,
