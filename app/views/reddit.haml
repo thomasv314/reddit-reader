@@ -1,0 +1,12 @@
+- content_for :title, @feed.title
+
+.container
+  .row
+    .col-lg-8
+      %h1.clearfix
+        - if @feed.image
+          %img{ src: @feed.image }
+        - else
+          = @feed.title
+      - @feed.entries.each do |item|
+        = partial "common/reddit_item", locals: { item: item }

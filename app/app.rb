@@ -6,8 +6,9 @@ module Reddit
     register Padrino::Helpers
 
     enable :sessions
-  
+     
     get "/" do
+      @feed = RedditReader.new.read
       haml :reddit
     end
 

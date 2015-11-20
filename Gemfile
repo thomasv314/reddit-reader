@@ -21,13 +21,15 @@ gem 'sass'
 gem 'haml'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'sqlite3'
-
+gem 'feedjira' # used to fetch & parse RSS
 # Design / Styles
 gem 'bootstrap-sass', '~> 3.3.5'
 
 # Test requirements
 gem 'minitest', :require => 'minitest/autorun', :group => 'test'
 gem 'rack-test', :require => 'rack/test', :group => 'test'
+gem 'guard'
+gem 'guard-minitest'
 
 # Padrino Stable Gem
 gem 'padrino', '0.13.0'

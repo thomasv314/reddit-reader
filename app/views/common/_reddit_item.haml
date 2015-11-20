@@ -1,0 +1,15 @@
+.row.reddit-item
+  .col-lg-2
+    %a{ href: item.url }
+      - if item.media_thumbnail
+        %img.img-responsive{ src: item.media_thumbnail, alt: item.media_title }
+      - else 
+        %img.img-responsive{ src: "/images/lil-reddit-guy.png", alt: item.title }
+  .col-lg-10
+    %h4
+      %a{ href: item.url }= item.title 
+    %p 
+      Posted in 
+      %a{ href: "/r/#{item.categories.first}"}= item.categories.first
+      = time_ago_in_words item.published
+      ago
