@@ -38,13 +38,18 @@ module Reddit
     post "/favorite" do
       @favorite = Favorite.find_by_url(favorite_params["url"]) 
       if @favorite.nil?
-        @favorite = Favorite.create(favorite_params)
-        session[:flash] = "Favorited #{favorite_params["title"]}"
-        redirect request.referrer
+        @favorite = Favorite.new(favorite_params)
+        if @favorite.save
+          session[:flash] = "Favorited #{favorite_params["title"]}"
+          redirect request.referrer, 301
+        else
+          session[:flash] = "Failed to favorite #{favorite_params["title"]}"
+          redirect request.referrer, 422
+        end
       else
         @favorite.destroy
         session[:flash] = "Unfavorited #{favorite_params["title"]}"
-        redirect request.referrer
+        redirect request.referrer, 301
       end
     end
 

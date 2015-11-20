@@ -13,25 +13,30 @@
 #     :socket    => '/tmp/mysql.sock'
 #   }
 #
-ActiveRecord::Base.configurations[:development] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'reddit_development.db')
 
-}
+if Padrino.env == :production
+  ActiveRecord::Base.configurations[:production] = {
+    :adapter   => 'mysql2',
+    :encoding  => 'utf8',
+    :reconnect => true,
+    :database  => ENV["DATABASE_ENV_MYSQL_DATABASE"],
+    :pool      => 5,
+    :username  => 'root',
+    :password  => ENV["DATABASE_ENV_MYSQL_ROOT_PASSWORD"],
+    :host      => ENV["DATABASE_PORT_3306_TCP_ADDR"],
+  }
+else
+  ActiveRecord::Base.configurations[:development] = {
+    :adapter => 'sqlite3',
+    :database => Padrino.root('db', 'reddit_development.db')
+  }
 
-ActiveRecord::Base.default_timezone = :est
+  ActiveRecord::Base.configurations[:test] = {
+    :adapter => 'sqlite3',
+    :database => Padrino.root('db', 'reddit_test.db')
 
-ActiveRecord::Base.configurations[:production] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'reddit_production.db')
-
-}
-
-ActiveRecord::Base.configurations[:test] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'reddit_test.db')
-
-}
+  }
+end
 
 # Setup our logger
 ActiveRecord::Base.logger = logger

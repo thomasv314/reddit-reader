@@ -1,5 +1,7 @@
 class Favorite < ActiveRecord::Base
 
+  validates_presence_of :url
+
   def media_thumbnail
     image_url
   end

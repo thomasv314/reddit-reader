@@ -22,8 +22,14 @@ gem 'haml'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'sqlite3'
 gem 'feedjira' # used to fetch & parse RSS
+
 # Design / Styles
 gem 'bootstrap-sass', '~> 3.3.5'
+gem 'unicorn'
+
+group :production do
+  gem 'mysql2'
+end
 
 # Test requirements
 gem 'minitest', :require => 'minitest/autorun', :group => 'test'

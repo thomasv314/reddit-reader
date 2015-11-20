@@ -18,4 +18,11 @@ class MiniTest::Spec
     @app ||= block_given? ? app.instance_eval(&blk) : app
     @app ||= Padrino.application
   end
+
+  def setup
+    app Reddit::App do
+      set :protect_from_csrf, false
+    end
+  end
+
 end
