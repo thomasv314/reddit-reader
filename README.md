@@ -1,6 +1,8 @@
 # reddit-reader
 Parses reddit RSS feeds
 
+Live at http://reddit.vendetta.io
+
 ### Running development  (with pow.cx) on a Mac:
 - `bundle install`
 - `bundle exec rake db:migrate`
