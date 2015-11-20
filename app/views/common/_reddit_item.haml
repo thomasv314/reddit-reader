@@ -11,6 +11,11 @@
     %ul.list-inline
       %li
         = form_tag "/favorite" do
+          - if item.categories.empty?
+            = input_tag :hidden, name: :category, value: @current_category
+          - else
+            = input_tag :hidden, name: :category, value: item.categories.first
+          = input_tag :hidden, name: :posted, value: item.published.strftime('%Y-%m-%d %I:%M:%S')
           = input_tag :hidden, name: :title, value: item.title
           = input_tag :hidden, name: :url, value: item.url
           = input_tag :hidden, name: :image_url, value: item.media_thumbnail if !item.media_thumbnail.nil?
@@ -26,10 +31,13 @@
               Unfavorite
             - else
               Favorite
-      - if !item.categories.empty?
         %li
-          %a.btn.btn-text{ href: "/r/#{item.categories.first}" }
-            Posted in #{item.categories.first}
+          - if item.categories.empty?
+            %a.btn.btn-text{ href: "/r/#{@current_category}" }
+              Posted in #{@current_category}
+          - else
+            %a.btn.btn-text{ href: "/r/#{item.categories.first}" }
+              Posted in #{item.categories.first}
       %li
         Posted
         = time_ago_in_words item.published

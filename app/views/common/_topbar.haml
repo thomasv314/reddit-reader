@@ -9,10 +9,13 @@
         %span.icon-bar
       %a.navbar-brand{:href => "/"} Reddit Reader
     / Collect the nav links, forms, and other content for toggling
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+    .collapse.navbar-collapse
       %ul.nav.navbar-nav
-      %form.navbar-form.navbar-left{:role => "search"}
+        %li
+          %a{ href: "/favorites" } Favorites
+      %form#subreddit-go.navbar-form.navbar-left
         .form-group
-          %input.form-control{:placeholder => "/r/", :type => "text"}/
+          .input-group
+            %span.input-group-addon /r/
+            %input#sub-field.form-control{type: "text", name: "subreddit"}/
         %button.btn.btn-default{:type => "submit"} Go
-

@@ -8,12 +8,8 @@ class Favorite < ActiveRecord::Base
     title
   end
 
-  def categories
-    []
-  end
-  
   def published
-    DateTime.now
+    posted
   end
 
 end

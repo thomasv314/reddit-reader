@@ -19,6 +19,8 @@ ActiveRecord::Base.configurations[:development] = {
 
 }
 
+ActiveRecord::Base.default_timezone = :est
+
 ActiveRecord::Base.configurations[:production] = {
   :adapter => 'sqlite3',
   :database => Padrino.root('db', 'reddit_production.db')

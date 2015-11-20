@@ -25,7 +25,11 @@ class RedditReader
 
   # Returns an RSS feed 
   def read
-    Feedjira::Feed.fetch_and_parse(@url)
+    begin
+      Feedjira::Feed.fetch_and_parse(@url)
+    rescue
+      false
+    end
   end
 
 end

@@ -14,12 +14,15 @@
 ActiveRecord::Schema.define(version: 1) do
 
   create_table "favorites", force: :cascade do |t|
+    t.datetime "posted"
+    t.string   "category"
     t.string   "title"
     t.string   "url"
     t.string   "image_url"
-    t.time     "posted"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "favorites", ["url"], name: "index_favorites_on_url"
 
 end

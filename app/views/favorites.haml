@@ -1,3 +1,4 @@
+- content_for :title, "Favorites"
 .container
   .row
     .col-lg-8
@@ -7,4 +8,4 @@
         Oh no! You don't have any favorites. 
       - else
         - @favorites.each do |item|
-          = partial "common/reddit_item", locals: { item: item }
+          = partial "common/favorite", locals: { item: item }

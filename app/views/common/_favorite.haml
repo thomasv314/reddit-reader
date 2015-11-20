@@ -1,0 +1,26 @@
+.row.reddit-item
+  .col-lg-2
+    %a{ href: item.url }
+      - if item.media_thumbnail
+        %img.img-responsive{ src: item.media_thumbnail, alt: item.media_title }
+      - else 
+        %img.img-responsive{ src: "/images/lil-reddit-guy.png", alt: item.title }
+  .col-lg-10
+    %h4
+      %a{ href: item.url }= item.title
+    %ul.list-inline
+      %li
+        = form_tag "/favorite" do
+          = input_tag :hidden, name: :url, value: item.url
+          %button.btn.btn-danger{ type: "submit" }
+            %i.fa.fa-star
+            Unfavorite
+        %li
+          %a.btn.btn-text{ href: "/r/#{item.category}" }
+            Posted in #{item.category}
+      %li
+        Favorited
+        = time_ago_in_words item.created_at
+        ago
+
+

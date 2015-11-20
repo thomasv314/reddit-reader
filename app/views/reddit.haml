@@ -2,11 +2,14 @@
 
 .container
   .row
-    .col-lg-8
-      %h1.clearfix
-        - if @feed.image
-          %img{ src: @feed.image }
-        - else
-          = @feed.title
+    .col-lg-7
+      %h1= @feed.title
       - @feed.entries.each do |item|
         = partial "common/reddit_item", locals: { item: item }
+    .col-lg-4.col-lg-offset-1
+      - if @feed.image
+        %img.img-responsive{ src: @feed.image }
+      - else
+        %h2 About #{@feed.title}
+      %hr
+      %p= @feed.description
