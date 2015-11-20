@@ -1,0 +1,25 @@
+databasedata:
+  image: busybox
+  command: /bin/true
+  volumes: 
+    - /var/lib/mysql
+database: 
+  image: mysql
+  volumes_from: 
+    - databasedata
+  ports:
+    - "3306"
+  environment:
+    MYSQL_DATABASE: reddit
+    MYSQL_ROOT_PASSWORD: super-secure-reddit
+web:
+  build: .
+  command: bundle exec unicorn -c /app/config/unicorn.rb -E production
+  environment:
+    RACK_ENV: production
+  links:
+    - database
+  volumes:
+    - ./log:/app/log
+  ports:
+    - "83:8080"
