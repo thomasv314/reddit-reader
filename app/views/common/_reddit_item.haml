@@ -14,9 +14,18 @@
           = input_tag :hidden, name: :title, value: item.title
           = input_tag :hidden, name: :url, value: item.url
           = input_tag :hidden, name: :image_url, value: item.media_thumbnail if !item.media_thumbnail.nil?
-          %button.btn.btn-primary{ type: "submit" }
+          
+          - btn_cls = "btn "
+          - if @existing_favorites.include?(item.url)
+            - btn_cls += "btn-danger"
+          - else
+            - btn_cls += "btn-success"
+          %button{ type: "submit", class: btn_cls }
             %i.fa.fa-star
-            Favorite
+            - if @existing_favorites.include? item.url
+              Unfavorite
+            - else
+              Favorite
       - if !item.categories.empty?
         %li
           %a.btn.btn-text{ href: "/r/#{item.categories.first}" }

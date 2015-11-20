@@ -9,11 +9,13 @@ module Reddit
 
     get "/" do
       @feed = RedditReader.new.read
+      load_existing_favorites 
       haml :reddit
     end
     
     get "/r/:subreddit" do
       @feed = RedditReader.new("/r/#{params[:subreddit]}").read
+      load_existing_favorites  
       haml :reddit
     end
    
@@ -43,6 +45,12 @@ module Reddit
       @favorite_params ||= params.select { |k, v| allowed_params.include? k }
     end
   
+    def load_existing_favorites
+      # Get an array of urls from the feed 
+      urls = @feed.entries.map { |e| e.url }
+      @existing_favorites = Favorite.where(url: urls).pluck(:url).uniq
+    end
+
     ##
     # Caching support.
     #
