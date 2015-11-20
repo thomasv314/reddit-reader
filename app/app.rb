@@ -6,12 +6,43 @@ module Reddit
     register Padrino::Helpers
 
     enable :sessions
-     
+
     get "/" do
       @feed = RedditReader.new.read
       haml :reddit
     end
+    
+    get "/r/:subreddit" do
+      @feed = RedditReader.new("/r/#{params[:subreddit]}").read
+      haml :reddit
+    end
+   
+    get "/favorites" do
+      @favorites = Favorite.all
+      haml :favorites
+    end
 
+    post "/favorite" do
+      @favorite = Favorite.find_by_url(favorite_params["url"]) 
+      logger.info(request.referer) 
+      if @favorite.nil?
+        @favorite = Favorite.create(favorite_params)
+        session[:flash] = "Favorited #{favorite_params["title"]}"
+        redirect request.referrer
+      else
+        @favorite.destroy
+        session[:flash] = "Unfavorited #{favorite_params["title"]}"
+        redirect request.referrer
+      end
+    end
+  
+    protected
+    # Very basic version of strong params 
+    def favorite_params
+      allowed_params = [ "title", "url", "image_url" ]
+      @favorite_params ||= params.select { |k, v| allowed_params.include? k }
+    end
+  
     ##
     # Caching support.
     #

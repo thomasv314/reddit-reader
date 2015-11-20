@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-lg-8
+      %h1
+        Your Favorites
+      - if @favorites.empty?
+        Oh no! You don't have any favorites. 
+      - else
+        - @favorites.each do |item|
+          = partial "common/reddit_item", locals: { item: item }

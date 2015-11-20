@@ -9,6 +9,12 @@
     %link{:href => "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css", :rel => "stylesheet"}/
   %body
     = partial "common/topbar"  
+    - if session[:flash]
+      .container
+        .row
+          .col-lg-12
+            .alert.alert-info
+              = session.delete :flash
     = yield
     = javascript_include_tag "https://code.jquery.com/jquery-1.11.3.min.js"
     = javascript_include_tag "application"

@@ -7,9 +7,22 @@
         %img.img-responsive{ src: "/images/lil-reddit-guy.png", alt: item.title }
   .col-lg-10
     %h4
-      %a{ href: item.url }= item.title 
-    %p 
-      Posted in 
-      %a{ href: "/r/#{item.categories.first}"}= item.categories.first
-      = time_ago_in_words item.published
-      ago
+      %a{ href: item.url }= item.title
+    %ul.list-inline
+      %li
+        = form_tag "/favorite" do
+          = input_tag :hidden, name: :title, value: item.title
+          = input_tag :hidden, name: :url, value: item.url
+          = input_tag :hidden, name: :image_url, value: item.media_thumbnail if !item.media_thumbnail.nil?
+          %button.btn.btn-primary{ type: "submit" }
+            %i.fa.fa-star
+            Favorite
+      - if !item.categories.empty?
+        %li
+          %a.btn.btn-text{ href: "/r/#{item.categories.first}" }
+            Posted in #{item.categories.first}
+      %li
+        Posted
+        = time_ago_in_words item.published
+        ago
+
