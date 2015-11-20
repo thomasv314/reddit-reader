@@ -1,12 +1,12 @@
 - content_for :title, @feed.title
 
 .container
-  .row
-    .col-lg-7
+  .row-fluid
+    .col-lg-7.col-md-7.col-sm-7
       %h1= @feed.title
       - @feed.entries.each do |item|
         = partial "common/reddit_item", locals: { item: item }
-    .col-lg-4.col-lg-offset-1
+    .col-lg-4.col-lg-offset-1.col-md-4.col-sm-4
       - if @feed.image
         %img.img-responsive{ src: @feed.image }
       - else
